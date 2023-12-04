@@ -1,5 +1,6 @@
 export interface Guests {
   name: string
+  email: string
   paymentValue: number
   isPayed: boolean
   isOwner: boolean

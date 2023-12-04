@@ -15,10 +15,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const isLoggedIn = localStorage.getItem('isLoggedIn')
-  // if(!isLoggedIn) {
-  //   push
-  // }
   return (
     <html lang="pt-br" className="bg-white py-3">
       <body
@@ -29,7 +25,7 @@ export default function RootLayout({
         <header className="bg-[#ffd836] text-black font-extrabold text-[32px] flex justify-center items-center bg-header-background min-h-[200px]">
           Agenda de Churras
         </header>
-        <main className="flex flex-col items-center justify-between px-6 ">
+        <main className="flex flex-col items-center justify-between px-6">
           {children}
         </main>
         <footer className="w-full flex justify-center items-center p-10">
