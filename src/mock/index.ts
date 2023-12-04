@@ -102,29 +102,7 @@ export const churras: Churras[] = [
     date: new Date('12/20/2023'),
     maxPayment: 20,
     minPayment: 10,
-    guests: [
-      {
-        name: 'Julio',
-        email: 'julio.memelli@gmail.com',
-        isOwner: true,
-        isPayed: true,
-        paymentValue: 20,
-      },
-      {
-        name: 'Vitinho',
-        email: 'vitin@gmail.com',
-        isOwner: false,
-        isPayed: false,
-        paymentValue: 10,
-      },
-      {
-        name: 'Amanda',
-        email: 'amanda@gmail.com',
-        isOwner: false,
-        isPayed: true,
-        paymentValue: 10,
-      },
-    ],
+    guests: [],
   },
   {
     id: '4',

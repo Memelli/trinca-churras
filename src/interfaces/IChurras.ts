@@ -7,7 +7,7 @@ export interface Guests {
 }
 
 export interface Churras {
-  id: string | number
+  id: string
   title: string
   date: Date
   maxPayment: number

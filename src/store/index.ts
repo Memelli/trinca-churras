@@ -1,6 +1,6 @@
 import { Churras, Guests } from '@/interfaces/IChurras'
 import { create } from 'zustand'
-import { churras, churras as mock } from '@/mock'
+import { churras as mock } from '@/mock'
 
 interface ChurrasState {
   churras: Churras[]
@@ -28,16 +28,20 @@ export const useChurrasStore = create<ChurrasState>()((set) => ({
       }
     }),
 
-  createNewChurras: (churras: Churras) =>
+  createNewChurras: (newChurras: Churras) =>
     set((state) => {
-      state.churras.push(churras)
-      return state
+      return {
+        churras: [...state.churras, newChurras],
+      }
     }),
 
   editChurrasGuests: (guests: Guests[], churrasId: string) =>
     set((state) => {
+      console.log(guests)
       const [churrasFounded] = state.churras.filter((x) => x.id === churrasId)
       churrasFounded.guests = [...guests]
+
+      console.log(churrasFounded)
 
       const newState = state.churras.filter((x) => x.id !== churrasId)
       newState.push(churrasFounded)

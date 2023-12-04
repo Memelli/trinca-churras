@@ -1,13 +1,9 @@
-'use client'
 import { Churras } from '@/interfaces/IChurras'
 import { LuUsers2 } from 'react-icons/lu'
 import { BiSolidDollarCircle } from 'react-icons/bi'
 import { format } from 'date-fns'
-import { useRouter } from 'next/navigation'
 
 export default function ChurrasCard(churras: Churras) {
-  const { push } = useRouter()
-
   const guestsCount = churras.guests.length
   const totalPayment = () => {
     const paymentCheck = churras.guests.filter(
@@ -22,15 +18,8 @@ export default function ChurrasCard(churras: Churras) {
     return totalPayed
   }
 
-  const handleClick = () => {
-    push(`/churras/${churras.id}`)
-  }
-
   return (
-    <div
-      className="bg-white p-5 min-w-[282px] min-h-[192px] shadow-lg font-black text-black flex flex-col justify-between hover:shadow-xl hover:cursor-pointer"
-      onClick={handleClick}
-    >
+    <div className="bg-white p-5 min-w-[282px] min-h-[192px] shadow-lg font-black text-black flex flex-col justify-between hover:shadow-xl hover:cursor-pointer">
       <div>
         <p className="text-black font-extrabold text-[28px]">
           {format(new Date(churras.date), 'dd/MM')}
