@@ -7,7 +7,6 @@ import {
 } from '@/utils/manage-guests-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface IInviteGuestsProps {
