@@ -1,7 +1,14 @@
 'use client'
 import { Guests } from '@/interfaces/IChurras'
 import { useChurrasStore } from '@/store'
-import { ChangeEvent, useState } from 'react'
+import {
+  ManageGuestsFormData,
+  manageGuestsSchema,
+} from '@/utils/manage-guests-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 interface IInviteGuestsProps {
   churrasId: string
@@ -9,92 +16,80 @@ interface IInviteGuestsProps {
 
 export default function InviteGuests({ churrasId }: IInviteGuestsProps) {
   const { addNewGuest } = useChurrasStore((state) => state)
-  const [guest, setGuest] = useState({
-    name: '',
-    email: '',
-    paymentValue: 0,
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ManageGuestsFormData>({
+    resolver: zodResolver(manageGuestsSchema),
   })
 
-  const handleSubmitGuest = () => {
-    if (!guest.email || !guest.name) return
+  const handleSubmitGuest = (data: ManageGuestsFormData) => {
     const newGuest: Guests = {
-      email: guest.email,
-      name: guest.name,
+      email: data.email,
+      name: data.name,
       isOwner: false,
       isPayed: false,
-      paymentValue: guest.paymentValue,
+      paymentValue: Number(data.paymentValue),
     }
 
     addNewGuest(newGuest, churrasId)
-    setGuest({
-      name: '',
-      email: '',
-      paymentValue: 0,
-    })
-  }
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setGuest((state) => ({
-      name: e.target.value,
-      email: state.email,
-      paymentValue: state.paymentValue,
-    }))
-  }
-
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setGuest((state) => ({
-      name: state.name,
-      email: e.target.value,
-      paymentValue: state.paymentValue,
-    }))
-  }
-
-  const handlePaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setGuest((state) => ({
-      name: state.name,
-      email: state.email,
-      paymentValue: Number(e.target.value),
-    }))
   }
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-between w-full gap-x-4 mt-2">
+      <form
+        onSubmit={handleSubmit(handleSubmitGuest)}
+        className="flex justify-between w-full gap-x-4 mt-2"
+      >
         <div className="w-2/4">
           <input
-            value={guest.name}
             placeholder="Qual o nome da fera?"
-            onChange={handleNameChange}
-            className="border p-2 rounded-md w-full"
+            className={clsx(
+              'border p-2 rounded-md',
+              errors.name ? 'focus:outline-red-400' : '',
+            )}
+            {...register('name')}
           />
+          {errors.name && (
+            <span className="font-bold text-[12px] text-red-600">
+              {errors.name.message as string}
+            </span>
+          )}
         </div>
 
         <div className="w-2/4">
           <input
-            value={guest.email}
             placeholder="E o e-mail?"
-            onChange={handleEmailChange}
             className="border p-2 rounded-md w-full"
+            {...register('email')}
           />
+          {errors.email && (
+            <span className="font-bold text-[12px] text-red-600">
+              {errors.email.message as string}
+            </span>
+          )}
         </div>
 
         <div className="w-2/4">
           <input
-            value={guest.paymentValue}
             type="number"
             placeholder="Vai pagar quanto?"
-            onChange={handlePaymentChange}
             className="border p-2 rounded-md w-full"
+            {...register('paymentValue')}
           />
+          {errors.paymentValue && (
+            <span className="font-bold text-[12px] text-red-600">
+              {errors.paymentValue.message as string}
+            </span>
+          )}
         </div>
 
-        <button
-          onClick={handleSubmitGuest}
-          className="bg-[#FFD836] rounded-md w-[40px] h-[40px] font-bold text-[21px]"
-        >
+        <button className="bg-[#FFD836] rounded-md px-5 py-1 h-fit font-bold text-[21px]">
           +
         </button>
-      </div>
+      </form>
     </div>
   )
 }

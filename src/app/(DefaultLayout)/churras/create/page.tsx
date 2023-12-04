@@ -10,11 +10,11 @@ import {
 } from '@/utils/create-churras-schema'
 import clsx from 'clsx'
 import { Churras } from '@/interfaces/IChurras'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function CreateChurras() {
   const { push } = useRouter()
-  const { createNewChurras, churras } = useChurrasStore((state) => state)
+  const { createNewChurras } = useChurrasStore((state) => state)
 
   const {
     register,
