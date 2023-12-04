@@ -14,7 +14,7 @@ export default function ChurrasDetailsBody({ guest, id }: IChurrasDetailsBody) {
   return (
     <div className="w-full flex flex-col">
       <div
-        onClick={() => setPayed(String(id), guest.name, !guest.isPayed)}
+        onClick={() => setPayed(String(id), guest.email, !guest.isPayed)}
         className="flex items-center cursor-pointer border-b-[#E5C231] border-b py-1"
       >
         <ChurrasSelectedButton isSelected={guest.isPayed} />

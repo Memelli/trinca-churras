@@ -6,15 +6,18 @@ interface ChurrasState {
   churras: Churras[]
   setPayed: (churrasId: string, guestEmail: string, value: boolean) => void
   createNewChurras: (churras: Churras) => void
-  editChurrasGuests: (guests: Guests[], churrasId: string) => void
+  addNewGuest: (guest: Guests, churrasId: string) => void
 }
 
 export const useChurrasStore = create<ChurrasState>()((set) => ({
   churras: mock,
   setPayed: (churrasId, guestEmail, value) =>
     set((state) => {
+      console.log('called')
       const [churrasFounded] = state.churras.filter((x) => x.id === churrasId)
       churrasFounded.guests.forEach((guest) => {
+        console.log(guestEmail)
+        console.log(guest.email)
         if (guest.email === guestEmail) {
           guest.isPayed = value
         }
@@ -35,11 +38,10 @@ export const useChurrasStore = create<ChurrasState>()((set) => ({
       }
     }),
 
-  editChurrasGuests: (guests: Guests[], churrasId: string) =>
+  addNewGuest: (guest: Guests, churrasId: string) =>
     set((state) => {
-      console.log(guests)
       const [churrasFounded] = state.churras.filter((x) => x.id === churrasId)
-      churrasFounded.guests = [...guests]
+      churrasFounded.guests.push(guest)
 
       console.log(churrasFounded)
 

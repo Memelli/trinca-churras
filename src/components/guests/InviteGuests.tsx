@@ -4,19 +4,15 @@ import { useChurrasStore } from '@/store'
 import { ChangeEvent, useState } from 'react'
 
 interface IInviteGuestsProps {
-  guests: Guests[]
   churrasId: string
 }
 
-export default function InviteGuests({
-  guests,
-  churrasId,
-}: IInviteGuestsProps) {
-  const { editChurrasGuests } = useChurrasStore((state) => state)
-  const [guestsList, setGuestsList] = useState<Guests[]>(guests)
+export default function InviteGuests({ churrasId }: IInviteGuestsProps) {
+  const { addNewGuest } = useChurrasStore((state) => state)
   const [guest, setGuest] = useState({
     name: '',
     email: '',
+    paymentValue: 0,
   })
 
   const handleSubmitGuest = () => {
@@ -26,27 +22,22 @@ export default function InviteGuests({
       name: guest.name,
       isOwner: false,
       isPayed: false,
-      paymentValue: 0,
+      paymentValue: guest.paymentValue,
     }
 
-    setGuestsList((state) => [...state, newGuest])
-    editChurrasGuests(guestsList, churrasId)
+    addNewGuest(newGuest, churrasId)
     setGuest({
       name: '',
       email: '',
+      paymentValue: 0,
     })
-  }
-
-  const handleRemoveGuest = (guestEmail: string) => {
-    const newGuests = guestsList.filter((guest) => guest.email !== guestEmail)
-
-    setGuestsList(newGuests)
   }
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGuest((state) => ({
       name: e.target.value,
       email: state.email,
+      paymentValue: state.paymentValue,
     }))
   }
 
@@ -54,6 +45,15 @@ export default function InviteGuests({
     setGuest((state) => ({
       name: state.name,
       email: e.target.value,
+      paymentValue: state.paymentValue,
+    }))
+  }
+
+  const handlePaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setGuest((state) => ({
+      name: state.name,
+      email: state.email,
+      paymentValue: Number(e.target.value),
     }))
   }
 
@@ -78,34 +78,22 @@ export default function InviteGuests({
           />
         </div>
 
+        <div className="w-2/4">
+          <input
+            value={guest.paymentValue}
+            type="number"
+            placeholder="Vai pagar quanto?"
+            onChange={handlePaymentChange}
+            className="border p-2 rounded-md w-full"
+          />
+        </div>
+
         <button
           onClick={handleSubmitGuest}
           className="bg-[#FFD836] rounded-md w-[40px] h-[40px] font-bold text-[21px]"
         >
           +
         </button>
-      </div>
-
-      <div className="flex flex-col mt-4">
-        {guestsList && (
-          <div>
-            {guestsList.map((guest) => (
-              <div
-                key={guest.name}
-                className="flex w-full justify-between items-center"
-              >
-                <p className="text-[rgba(0,0,0,.8)] font-bold">{guest.name}</p>
-                <p className="text-[rgba(0,0,0,.8)]">{guest.email}</p>
-                <button
-                  onClick={() => handleRemoveGuest(guest.email)}
-                  className="font-extrabold rounded-sm"
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   )
