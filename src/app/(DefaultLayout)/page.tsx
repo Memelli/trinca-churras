@@ -3,16 +3,8 @@ import ChurrasCard from '@/components/churras/ChurrasCard'
 import CreateChurrasCard from '@/components/churras/CreateChurrasCard'
 import { useChurrasStore } from '@/store'
 import { compareAsc } from 'date-fns'
-import { useRouter } from 'next/navigation'
 
 export default function Home() {
-  const { push } = useRouter()
-  // const isLoggedIn = localStorage.getItem('isLoggedIn')
-
-  // if (!isLoggedIn) {
-  //   push('/login')
-  // }
-
   const state = useChurrasStore((state) => state.churras)
   const list = state.sort((a, b) => {
     return compareAsc(a.date, b.date)
