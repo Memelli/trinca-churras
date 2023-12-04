@@ -1,7 +1,10 @@
-import { Guests } from '@/interfaces/IChurras'
-import { format } from 'date-fns'
 import { BiSolidDollarCircle } from 'react-icons/bi'
+import { format } from 'date-fns'
 import { LuUsers2 } from 'react-icons/lu'
+import { FaArrowLeft } from 'react-icons/fa'
+
+import { Guests } from '@/interfaces/IChurras'
+import Link from 'next/link'
 
 interface IChurrasDetailsHeader {
   date: Date
@@ -40,6 +43,14 @@ export default function ChurrasDetailsHeader({
   return (
     <div className="flex justify-between w-full">
       <div className="flex flex-col">
+        <div className="mb-5 ">
+          <Link
+            href="/"
+            className="w-full flex items-center gap-x-2 hover:underline"
+          >
+            <FaArrowLeft /> Voltar
+          </Link>
+        </div>
         <div>
           <p className="text-black text-[28px] font-extrabold">
             {format(new Date(date), 'dd/MM')}
