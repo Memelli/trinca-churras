@@ -11,10 +11,10 @@ export const createChurrasSchema = z.object({
     ),
   maxPayment: z
     .string()
-    .min(1, { message: 'O valor máximo não pode ser maior que 1' }),
+    .min(1, { message: 'O valor máximo não pode ficar em branco' }),
   minPayment: z
     .string()
-    .min(1, { message: 'O valor mínimo não pode ser maior que 1' }),
+    .min(1, { message: 'O valor mínimo não pode ficar em branco' }),
 })
 
 export type CreateChurrasFormData = z.infer<typeof createChurrasSchema>

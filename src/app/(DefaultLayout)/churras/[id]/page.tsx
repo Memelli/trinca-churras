@@ -3,7 +3,6 @@ import ChurrasDetailsBody from '@/components/churras-details/ChurrasDetailsBody'
 import ChurrasDetailsHeader from '@/components/churras-details/ChurrasDetailsHeader'
 import InviteGuests from '@/components/guests/InviteGuests'
 import { useChurrasStore } from '@/store'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { useState } from 'react'
 
@@ -66,6 +65,7 @@ export default function Churras(props: { params: { id: string } }) {
       <div className="mt-10 w-full flex flex-col">
         {foundedChurras.guests.map((guest, index) => (
           <ChurrasDetailsBody
+            enableEdit={enableEdit}
             guest={guest}
             id={foundedChurras.id}
             key={guest.name + index}

@@ -16,10 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br" className="bg-white py-3">
+    <html lang="pt-br" className="bg-white md:py-3">
       <body
         className={
-          raleway.className + ' ' + 'w-5/6 m-auto max-w-[636px] bg-[#FAFAFA]'
+          raleway.className +
+          ' ' +
+          'md:w-5/6 m-auto md:max-w-[636px] bg-[#FAFAFA]'
         }
       >
         <header className="bg-[#ffd836] text-black font-extrabold text-[32px] flex justify-center items-center bg-header-background min-h-[200px]">
