@@ -31,16 +31,16 @@ export default function CreateChurras() {
     const newChurrasDate =
       churrasDate[1] + '/' + churrasDate[0] + '/' + churrasDate[2]
 
-    /* const churras: Churras = {
+    const churras: Churras = {
       id: uuidv4(),
       title: data.title,
       date: new Date(newChurrasDate),
       guests: [],
       maxPayment: Number(data.maxPayment),
       minPayment: Number(data.minPayment),
-    } */
+    }
 
-    // createNewChurras(churras)
+    createNewChurras(churras)
     push('/')
   }
 
