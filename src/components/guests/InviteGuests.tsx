@@ -40,13 +40,13 @@ export default function InviteGuests({ churrasId }: IInviteGuestsProps) {
     <div className="flex flex-col">
       <form
         onSubmit={handleSubmit(handleSubmitGuest)}
-        className="flex justify-between w-full gap-x-4 mt-2"
+        className="flex flex-col md:flex-row justify-between w-full gap-x-4 mt-2 gap-y-4 md:gap-y-0"
       >
-        <div className="w-2/4">
+        <div className="w-full md:w-2/4">
           <input
             placeholder="Qual o nome da fera?"
             className={clsx(
-              'border p-2 rounded-md',
+              'border p-2 rounded-md w-full',
               errors.name ? 'focus:outline-red-400' : '',
             )}
             {...register('name')}
@@ -58,10 +58,13 @@ export default function InviteGuests({ churrasId }: IInviteGuestsProps) {
           )}
         </div>
 
-        <div className="w-2/4">
+        <div className="w-full md:w-2/4">
           <input
             placeholder="E o e-mail?"
-            className="border p-2 rounded-md w-full"
+            className={clsx(
+              'border p-2 rounded-md w-full',
+              errors.email ? 'focus:outline-red-400' : '',
+            )}
             {...register('email')}
           />
           {errors.email && (
@@ -71,11 +74,14 @@ export default function InviteGuests({ churrasId }: IInviteGuestsProps) {
           )}
         </div>
 
-        <div className="w-2/4">
+        <div className="w-full md:w-2/4">
           <input
             type="number"
             placeholder="Vai pagar quanto?"
-            className="border p-2 rounded-md w-full"
+            className={clsx(
+              'border p-2 rounded-md w-full',
+              errors.paymentValue ? 'focus:outline-red-400' : '',
+            )}
             {...register('paymentValue')}
           />
           {errors.paymentValue && (

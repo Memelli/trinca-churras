@@ -29,7 +29,7 @@ export default function Churras(props: { params: { id: string } }) {
       />
 
       <div className="flex flex-col">
-        <div className="flex flex-row-reverse gap-x-4">
+        <div className="flex flex-row-reverse gap-x-2 md:gap-x-4">
           <button
             onClick={() => setEnableInvite(!enableInvite)}
             className="bg-[#FFD836] px-5 py-2 rounded-lg font-bold shadow-md hover:shadow-lg"
@@ -53,12 +53,12 @@ export default function Churras(props: { params: { id: string } }) {
         <div className="flex text-center mt-8">
           <p className="text-black text-[16px] font-semibold">
             Oops, parece que você não convidou ninguém ainda...{' '}
-            <Link
-              className="text-[#ffd836] font-extrabold hover:underline"
-              href={`/guests/${foundedChurras.id}`}
+            <p
+              className="text-[#ffd836] font-extrabold cursor-pointer hover:underline"
+              onClick={() => setEnableInvite(true)}
             >
               clicando aqui
-            </Link>
+            </p>
             , você pode resolver isso!
           </p>
         </div>

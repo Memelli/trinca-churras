@@ -41,7 +41,7 @@ export default function ChurrasDetailsHeader({
   }
 
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex flex-col md:flex-row justify-between w-full">
       <div className="flex flex-col">
         <div className="mb-5 ">
           <Link
@@ -61,7 +61,7 @@ export default function ChurrasDetailsHeader({
         </div>
       </div>
 
-      <div className="flex flex-col justify-evenly">
+      <div className="flex md:flex-col md:justify-evenly justify-between mb-4 md:mb-0">
         <div className="flex items-center">
           <LuUsers2 className="text-[#FFD836] mr-2 w-[25px] h-[25px]" />{' '}
           {guests.length}

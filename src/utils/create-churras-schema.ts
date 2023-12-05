@@ -1,10 +1,7 @@
 import { z } from 'zod'
 
 export const createChurrasSchema = z.object({
-  title: z
-    .string()
-    .min(1, { message: 'O nome do churras é obrigatório' })
-    .regex(/^[A-Za-z]+$/i, 'Apenas letras são permitidas'),
+  title: z.string().min(1, { message: 'O nome do churras é obrigatório' }),
   date: z
     .string()
     .min(1, { message: 'Data invalida' })
