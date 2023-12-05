@@ -13,11 +13,8 @@ export const useChurrasStore = create<ChurrasState>()((set) => ({
   churras: mock,
   setPayed: (churrasId, guestEmail, value) =>
     set((state) => {
-      console.log('called')
       const [churrasFounded] = state.churras.filter((x) => x.id === churrasId)
       churrasFounded.guests.forEach((guest) => {
-        console.log(guestEmail)
-        console.log(guest.email)
         if (guest.email === guestEmail) {
           guest.isPayed = value
         }
@@ -42,8 +39,6 @@ export const useChurrasStore = create<ChurrasState>()((set) => ({
     set((state) => {
       const [churrasFounded] = state.churras.filter((x) => x.id === churrasId)
       churrasFounded.guests.push(guest)
-
-      console.log(churrasFounded)
 
       const newState = state.churras.filter((x) => x.id !== churrasId)
       newState.push(churrasFounded)

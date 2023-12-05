@@ -25,8 +25,6 @@ export default function CreateChurras() {
   })
 
   const onSubmit = (data: CreateChurrasFormData) => {
-    console.log(data.date)
-    console.log(new Date(data.date))
     const churrasDate = data.date.split('/')
     const newChurrasDate =
       churrasDate[1] + '/' + churrasDate[0] + '/' + churrasDate[2]
